@@ -29,6 +29,8 @@ public class WheelTime {
     private WheelView wv_seconds;
     private int gravity;
 
+    private List<Integer> mMinutes;
+
     private boolean[] type;
     private static final int DEFAULT_START_YEAR = 1900;
     private static final int DEFAULT_END_YEAR = 2100;
@@ -66,6 +68,9 @@ public class WheelTime {
         setView(view);
     }
 
+    public void setMinutes(List<Integer> minutes) {
+        mMinutes = minutes;
+    }
 
     public void setLunarMode(boolean isLunarCalendar) {
         this.isLunarCalendar = isLunarCalendar;
@@ -139,7 +144,12 @@ public class WheelTime {
         wv_hours.setGravity(gravity);
 
         wv_minutes = (WheelView) view.findViewById(R.id.min);
-        wv_minutes.setAdapter(new NumericWheelAdapter(0, 59));
+        if (mMinutes != null && mMinutes.size() > 0) {
+            wv_minutes.setAdapter(new ArrayWheelAdapter<>(mMinutes));
+        } else {
+            wv_minutes.setAdapter(new NumericWheelAdapter(0, 59));
+        }
+
         //wv_minutes.setLabel(context.getString(R.string.pickerview_minutes));// 添加文字
         wv_minutes.setCurrentItem(m);
         wv_minutes.setGravity(gravity);
@@ -383,7 +393,11 @@ public class WheelTime {
         wv_hours.setGravity(gravity);
         //分
         wv_minutes = (WheelView) view.findViewById(R.id.min);
-        wv_minutes.setAdapter(new NumericWheelAdapter(0, 59));
+        if (mMinutes != null && mMinutes.size() > 0) {
+            wv_minutes.setAdapter(new ArrayWheelAdapter<>(mMinutes));
+        } else {
+            wv_minutes.setAdapter(new NumericWheelAdapter(0, 59));
+        }
 
         wv_minutes.setCurrentItem(m);
         wv_minutes.setGravity(gravity);

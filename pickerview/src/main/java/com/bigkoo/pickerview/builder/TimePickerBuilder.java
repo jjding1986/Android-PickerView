@@ -11,6 +11,7 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.contrarywind.view.WheelView;
 
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by xiaosongzeem on 2018/3/20.
@@ -268,6 +269,11 @@ public class TimePickerBuilder {
      */
     public TimePickerBuilder setTimeSelectChangeListener(OnTimeSelectChangeListener listener) {
         mPickerOptions.timeSelectChangeListener = listener;
+        return this;
+    }
+
+    public TimePickerBuilder setMinuteOptions(List<Integer> minuteOptions) {
+        mPickerOptions.minuteTimes = minuteOptions;
         return this;
     }
 

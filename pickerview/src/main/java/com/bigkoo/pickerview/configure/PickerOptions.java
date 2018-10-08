@@ -5,15 +5,16 @@ import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.ViewGroup;
 
-import com.bigkoo.pickerview.listener.OnOptionsSelectChangeListener;
-import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.R;
 import com.bigkoo.pickerview.listener.CustomListener;
+import com.bigkoo.pickerview.listener.OnOptionsSelectChangeListener;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectChangeListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.contrarywind.view.WheelView;
 
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * 配置类
@@ -111,5 +112,5 @@ public class PickerOptions {
     public Typeface font = Typeface.MONOSPACE;//字体样式
     public WheelView.DividerType dividerType = WheelView.DividerType.FILL;//分隔线类型
 
-
+    public List<Integer> minuteTimes;
 }

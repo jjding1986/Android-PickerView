@@ -21,13 +21,13 @@ import android.widget.Toast;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.listener.CustomListener;
 import com.bigkoo.pickerview.listener.OnOptionsSelectChangeListener;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectChangeListener;
+import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
-import com.bigkoo.pickerview.listener.CustomListener;
-import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerviewdemo.bean.CardBean;
 import com.bigkoo.pickerviewdemo.bean.ProvinceBean;
 
@@ -35,6 +35,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v.getId() == R.id.btn_Time && pvTime != null) {
             // pvTime.setDate(Calendar.getInstance());
-           /* pvTime.show(); //show timePicker*/
+            /* pvTime.show(); //show timePicker*/
             pvTime.show(v);//弹出时间选择器，传递参数过去，回调的时候则可以绑定此view
         } else if (v.getId() == R.id.btn_Options && pvOptions != null) {
             pvOptions.show(); //弹出条件选择器
@@ -189,6 +190,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void initTimePicker() {//Dialog 模式下，在底部弹出
+        List<Integer> minutes = new ArrayList<>();
+        minutes.add(0);
+        minutes.add(15);
+        minutes.add(30);
+        minutes.add(45);
 
         pvTime = new TimePickerBuilder(this, new OnTimeSelectListener() {
             @Override
@@ -206,6 +212,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 })
                 .setType(new boolean[]{true, true, true, true, true, true})
                 .isDialog(true) //默认设置false ，内部实现将DecorView 作为它的父控件。
+                .setMinuteOptions(minutes)
                 .build();
 
         Dialog mDialog = pvTime.getDialog();
@@ -266,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setBgColor(Color.BLACK)//滚轮背景颜色 Night mode
                 .setSubmitColor(Color.WHITE)
                 .setCancelColor(Color.WHITE)*/
-               /*.animGravity(Gravity.RIGHT)// default is center*/
+                /*.animGravity(Gravity.RIGHT)// default is center*/
                 .setDate(selectedDate)
                 .setRangDate(startDate, endDate)
                 .setLayoutRes(R.layout.pickerview_custom_time, new CustomListener() {
@@ -314,7 +321,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //返回的分别是三个级别的选中位置
                 String tx = options1Items.get(options1).getPickerViewText()
                         + options2Items.get(options1).get(options2)
-                       /* + options3Items.get(options1).get(options2).get(options3).getPickerViewText()*/;
+                        /* + options3Items.get(options1).get(options2).get(options3).getPickerViewText()*/;
                 btn_Options.setText(tx);
             }
         })
